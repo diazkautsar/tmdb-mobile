@@ -1,0 +1,4 @@
+export const SET_NOW_PLAYING = 'SET_NOW_PLAYING'
+export const SET_LOADING = 'SET_LOADING'
+export const SET_UPCOMING = 'SET_UPCOMING'
+export const SET_POPULAR = 'SET_POPULAR'
