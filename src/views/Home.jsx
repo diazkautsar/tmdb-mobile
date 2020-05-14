@@ -33,23 +33,32 @@ const Home = () => {
   const DATA = [
     {
       title: 'Now Playing',
-      data: nowPlaying.results
+      data: nowPlaying.results,
+      icon: 'play'
     },
     {
       title: 'Coming Soon',
-      data: upcoming.results
+      data: upcoming.results,
+      icon: 'arrow-circle-o-up'
     },
     {
       title: 'Popular',
-      data: popular.results
-    }
+      data: popular.results,
+      icon: 'heart'
+    },
+    // {
+    //   icon: 'star'
+    // },
+    // {
+    //   icon: 'level-up'
+    // }
   ]
 
   return (
     <View style={styles.container}>
       <FlatList
         data={DATA}
-        renderItem={({ item }) => <Card data={item.data} />}
+        renderItem={({ item }) => <Card movies={item.data} icon={item.icon} title={item.title}/>}
         keyExtractor={item => item.id}
       />
     </View>
@@ -62,7 +71,8 @@ const styles = StyleSheet.create({
     marginTop: Constants.statusBarHeight,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 5
+    marginBottom: 5,
+    backgroundColor: '#F4F4F4',
   }
 })
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Image, ScrollView } from 'react-native'
 import { Card } from 'react-native-elements'
+import { FontAwesome } from '@expo/vector-icons';
 
 const CardList = ({ movie }) => {
   return (
@@ -12,18 +13,25 @@ const CardList = ({ movie }) => {
         source={{ uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}` }}
         style={{
           width: 300,
-          height: 300,
+          height: 450,
           borderRadius: 7,
         }} />
     </Card>
   )
 }
 
-const CardComponent = ({data}) => {
+const CardComponent = props => {
   return (
     <View style={styles.cardComponent}>
+      <FontAwesome name={props.icon} size={24} color="#FF7314" 
+      style={{
+        marginLeft: 20
+      }}
+      >
+        {props.title}
+      </FontAwesome>
       <ScrollView horizontal={true}>
-        {data.map((movie, index) => {
+        {props.movies.map((movie, index) => {
           return <CardList movie={movie} key={index} />
         })}
       </ScrollView>
@@ -36,9 +44,10 @@ const styles = StyleSheet.create({
     width: 360,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 7
+    borderRadius: 7,
   },
   cardComponent: {
+    margin: 10
     // width: "100%", 
     // height: "50%",
   }
