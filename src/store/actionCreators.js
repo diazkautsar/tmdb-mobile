@@ -6,7 +6,9 @@ import {
   SET_NOW_PLAYING, 
   SET_LOADING,
   SET_UPCOMING,
-  SET_POPULAR
+  SET_POPULAR,
+  SET_DETAIL,
+  SET_VIDEO
 } from './actionType'
 
 
@@ -65,7 +67,40 @@ export const getPopular = (value) => {
         break;
     }
   }
-} 
+}
+
+export const getDetail = (param) => {
+  return async function (dispatch) {
+    dispatch(setLoading(true))
+    try {
+      const {data} = await baseUrlMovie({
+        url: `/${param}?api_key=c8ae4195093d441d66861f9d8d7f3e63&language=en-US`
+      })
+      const video = await baseUrlMovie({
+        url: `/${param}/videos?api_key=c8ae4195093d441d66861f9d8d7f3e63&language=en-US`
+      })
+      dispatch(setVideo(video.data.results))
+      dispatch(setDetail(data))
+    } catch (error) {
+      console.log(error)
+    }
+    dispatch(setLoading(false))
+  }
+}
+
+export const setVideo = (value) => {
+  return {
+    type: SET_VIDEO,
+    payload: value
+  }
+}
+
+export const setDetail = (value) => {
+  return {
+    type: SET_DETAIL,
+    payload: value
+  }
+}
 
 export const setPopular = (value) => {
   return {

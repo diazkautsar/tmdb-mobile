@@ -20,9 +20,11 @@ const Tab = createBottomTabNavigator()
 const HomeStackScreen = () => {
   return (
     <HomeStack.Navigator
-    screenOptions={{
-      headerShown: false
-    }}
+    screenOptions={({ route }) => (
+      {
+        headerShown: route.name === 'Detail' ? true : false
+      }
+    )}
     >
       <HomeStack.Screen name="Home" component={Home} />
       <HomeStack.Screen name="Detail" component={Detail} />
@@ -33,9 +35,14 @@ const HomeStackScreen = () => {
 const ProfileStackScreen = () => {
   return (
     <ProfileStack.Navigator
-    screenOptions={{
-      headerShown: false
-    }}
+    // screenOptions={{
+    //   headerShown: false
+    // }}
+    screenOptions={({ route }) => (
+      {
+        headerShown: route.name === 'Detail' ? true : false
+      }
+    )}
     >
       <ProfileStack.Screen name="Profile" component={Profile} />
       <ProfileStack.Screen name="Detail" component={Detail} />

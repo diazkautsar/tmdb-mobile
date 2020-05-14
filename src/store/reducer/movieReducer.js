@@ -1,12 +1,14 @@
 import {
-  SET_NOW_PLAYING, SET_LOADING, SET_UPCOMING, SET_POPULAR
+  SET_NOW_PLAYING, SET_LOADING, SET_UPCOMING, SET_POPULAR, SET_DETAIL, SET_VIDEO
 } from '../actionType'
 
 const initialState = {
   loading: false,
   nowPlaying: [],
   popular: [],
-  upcoming: []
+  upcoming: [],
+  detail: [],
+  video: []
 }
 
 export const movieReducer = (state = initialState, action) => {
@@ -15,6 +17,18 @@ export const movieReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: action.payload
+      }
+
+    case SET_VIDEO:
+      return {
+        ...state,
+        video: action.payload
+      }
+
+    case SET_DETAIL:
+      return {
+        ...state,
+        detail: action.payload
       }
 
     case SET_NOW_PLAYING:

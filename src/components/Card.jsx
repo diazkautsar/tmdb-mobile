@@ -1,37 +1,50 @@
 import React from 'react';
-import { View, StyleSheet, Image, ScrollView } from 'react-native'
+import { View, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native'
 import { Card } from 'react-native-elements'
 import { FontAwesome } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native'
 
 const CardList = ({ movie }) => {
+  const navigation = useNavigation()
+
+  const toDetail = () => {
+    navigation.navigate('Detail', {
+      id: movie.id
+    })
+  }
+
   return (
-    <Card
-      containerStyle={styles.cardList}
-      title={movie.title}
+    <TouchableOpacity
+    onPress={toDetail}
     >
-      <Image
-        source={{ uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}` }}
-        style={{
-          width: 300,
-          height: 450,
-          borderRadius: 7,
-        }} />
-    </Card>
+      <Card
+        containerStyle={styles.cardList}
+        title={movie.title}
+      >
+        <Image
+          source={{ uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}` }}
+          style={{
+            width: 300,
+            height: 450,
+            borderRadius: 7,
+          }} />
+      </Card>
+    </TouchableOpacity>
   )
 }
 
-const CardComponent = props => {
+const CardComponent = ({ movies, icon, title }) => {
   return (
     <View style={styles.cardComponent}>
-      <FontAwesome name={props.icon} size={24} color="#FF7314" 
-      style={{
-        marginLeft: 20
-      }}
+      <FontAwesome name={icon} size={24} color="#FF7314"
+        style={{
+          marginLeft: 20
+        }}
       >
-        {props.title}
+        {title}
       </FontAwesome>
       <ScrollView horizontal={true}>
-        {props.movies.map((movie, index) => {
+        {movies.map((movie, index) => {
           return <CardList movie={movie} key={index} />
         })}
       </ScrollView>

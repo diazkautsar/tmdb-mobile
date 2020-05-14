@@ -59,7 +59,7 @@ const Home = () => {
       <FlatList
         data={DATA}
         renderItem={({ item }) => <Card movies={item.data} icon={item.icon} title={item.title}/>}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.title}
       />
     </View>
   )
