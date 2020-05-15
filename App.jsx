@@ -1,14 +1,13 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
 import { Provider } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { FontAwesome } from '@expo/vector-icons';
+import { Header } from 'react-native-elements'
 
 import store from './src/store/store'
-
 import Home from './src/views/Home'
 import Detail from './src/views/Detail'
 import Profile from './src/views/Profile'
@@ -20,11 +19,12 @@ const Tab = createBottomTabNavigator()
 const HomeStackScreen = () => {
   return (
     <HomeStack.Navigator
-    screenOptions={({ route }) => (
-      {
-        headerShown: route.name === 'Detail' ? true : false
-      }
-    )}
+    // screenOptions={({ route }) => (
+    //   {
+    //     headerShown: route.name === 'Detail' ? true : false
+    //   }
+    // )}
+    screenOptions={{ headerShown: false }}
     >
       <HomeStack.Screen name="Home" component={Home} />
       <HomeStack.Screen name="Detail" component={Detail} />
@@ -35,14 +35,12 @@ const HomeStackScreen = () => {
 const ProfileStackScreen = () => {
   return (
     <ProfileStack.Navigator
-    // screenOptions={{
-    //   headerShown: false
-    // }}
-    screenOptions={({ route }) => (
-      {
-        headerShown: route.name === 'Detail' ? true : false
-      }
-    )}
+    // screenOptions={({ route }) => (
+    //   {
+    //     headerShown: route.name === 'Detail' ? true : false
+    //   }
+    // )}
+    screenOptions={{ headerShown: false }}
     >
       <ProfileStack.Screen name="Profile" component={Profile} />
       <ProfileStack.Screen name="Detail" component={Detail} />
@@ -55,6 +53,7 @@ export default function App() {
   return (
     <Provider store={store} >
       <NavigationContainer>
+          <Header backgroundColor="#393534" centerComponent={{ text: 'MY TITLE', style: { color: '#fff', } }} />
           <Tab.Navigator
           screenOptions={({ route }) => (
             {
@@ -79,12 +78,3 @@ export default function App() {
     </Provider>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#F4F4F4',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });

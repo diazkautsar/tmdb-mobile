@@ -61,8 +61,6 @@ const styles = StyleSheet.create({
   },
   cardComponent: {
     margin: 10
-    // width: "100%", 
-    // height: "50%",
   }
 })
 export default CardComponent
