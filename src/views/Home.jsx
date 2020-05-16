@@ -5,7 +5,7 @@ import {
   FlatList,
   View,
 } from 'react-native'
-import Constants from 'expo-constants'
+// import Constants from 'expo-constants'
 import {
   getNowPlaying,
   getUpcoming,
@@ -68,7 +68,7 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Constants.statusBarHeight,
+    // marginTop: Constants.statusBarHeight,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 5,

@@ -5,12 +5,14 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { FontAwesome } from '@expo/vector-icons';
-import { Header } from 'react-native-elements'
 
 import store from './src/store/store'
 import Home from './src/views/Home'
 import Detail from './src/views/Detail'
 import Profile from './src/views/Profile'
+import List from './src/views/List'
+
+import SearchBar from './src/components/SearchBarHeader'
 
 const HomeStack = createStackNavigator()
 const ProfileStack = createStackNavigator()
@@ -18,32 +20,36 @@ const Tab = createBottomTabNavigator()
 
 const HomeStackScreen = () => {
   return (
-    <HomeStack.Navigator
-    // screenOptions={({ route }) => (
-    //   {
-    //     headerShown: route.name === 'Detail' ? true : false
-    //   }
-    // )}
-    screenOptions={{ headerShown: false }}
-    >
-      <HomeStack.Screen name="Home" component={Home} />
-      <HomeStack.Screen name="Detail" component={Detail} />
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="Home"
+        component={Home}
+        options={{ header: () => <SearchBar /> }}
+      />
+      <HomeStack.Screen
+        name="Detail"
+        component={Detail}
+        options={{ header: () => <SearchBar /> }}
+      />
+      <HomeStack.Screen name="List" component={List} options={{ headerStyle: {backgroundColor: "#393534"} }} />
     </HomeStack.Navigator>
   )
 }
 
 const ProfileStackScreen = () => {
   return (
-    <ProfileStack.Navigator
-    // screenOptions={({ route }) => (
-    //   {
-    //     headerShown: route.name === 'Detail' ? true : false
-    //   }
-    // )}
-    screenOptions={{ headerShown: false }}
-    >
-      <ProfileStack.Screen name="Profile" component={Profile} />
-      <ProfileStack.Screen name="Detail" component={Detail} />
+    <ProfileStack.Navigator>
+      <ProfileStack.Screen 
+      name="Profile" 
+      component={Profile} 
+      options={{ header: () => <SearchBar /> }}
+      />
+      <ProfileStack.Screen 
+      name="Detail" 
+      component={Detail} 
+      options={{ header: () => <SearchBar /> }}
+      />
+      <ProfileStack.Screen name="List" component={List} options={{ headerStyle: {backgroundColor: "#393534"} }} />
     </ProfileStack.Navigator>
   )
 }
@@ -53,8 +59,7 @@ export default function App() {
   return (
     <Provider store={store} >
       <NavigationContainer>
-          <Header backgroundColor="#393534" centerComponent={{ text: 'MY TITLE', style: { color: '#fff', } }} />
-          <Tab.Navigator
+        <Tab.Navigator
           screenOptions={({ route }) => (
             {
               tabBarIcon: () => {
@@ -70,10 +75,10 @@ export default function App() {
             activeTintColor: '#F4F4F4',
             inactiveTintColor: '#F4F4F4',
           }}
-          >
-            <Tab.Screen name="Home" component={HomeStackScreen} />
-            <Tab.Screen name="Profile" component={ProfileStackScreen} />
-          </Tab.Navigator>
+        >
+          <Tab.Screen name="Home" component={HomeStackScreen} />
+          <Tab.Screen name="Profile" component={ProfileStackScreen} />
+        </Tab.Navigator>
       </NavigationContainer>
     </Provider>
   );

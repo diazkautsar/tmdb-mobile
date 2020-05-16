@@ -1,5 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native'
+import { 
+  View, 
+  StyleSheet, 
+  Image, 
+  ScrollView, 
+  Platform,
+  TouchableWithoutFeedback 
+} from 'react-native'
 import { Card } from 'react-native-elements'
 import { FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'
@@ -14,7 +21,7 @@ const CardList = ({ movie }) => {
   }
 
   return (
-    <TouchableOpacity
+    <TouchableWithoutFeedback
     onPress={toDetail}
     >
       <Card
@@ -29,7 +36,7 @@ const CardList = ({ movie }) => {
             borderRadius: 7,
           }} />
       </Card>
-    </TouchableOpacity>
+    </TouchableWithoutFeedback>
   )
 }
 
@@ -38,7 +45,7 @@ const CardComponent = ({ movies, icon, title }) => {
     <View style={styles.cardComponent}>
       <FontAwesome name={icon} size={24} color="#FF7314"
         style={{
-          marginLeft: 20
+          marginLeft: 20,
         }}
       >
         {title}
@@ -54,13 +61,15 @@ const CardComponent = ({ movies, icon, title }) => {
 
 const styles = StyleSheet.create({
   cardList: {
-    width: 360,
+    // width: 360,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 7,
+    // marginTop: Platform.OS === 'android' ? 10 : 0
   },
   cardComponent: {
-    margin: 10
+    marginTop: 10,
+    margin:  Platform.OS === 'android' ? 0 : 10
   }
 })
 export default CardComponent
