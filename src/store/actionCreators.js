@@ -8,8 +8,45 @@ import {
   SET_UPCOMING,
   SET_POPULAR,
   SET_DETAIL,
-  SET_VIDEO
+  SET_VIDEO,
+  SET_SEARCH,
+  ADD_SEARCH
 } from './actionType'
+
+export const getSearch = (query, page) => {
+  return async function (dispatch) {
+    dispatch(setLoading(true))
+    try {
+      const { data } = await baseUrlMovie({
+        url: `https://api.themoviedb.org/3/search/movie?api_key=c8ae4195093d441d66861f9d8d7f3e63&language=en-US&query=${query}&page=${page}`
+      })
+      page === 1 ? dispatch(setSearch(data, query)) : dispatch(addSearch(data.results))
+    } catch (error) {
+      console.log(error)
+    } finally {
+      dispatch(setLoading(false))
+    }
+  }
+}
+
+export const addSearch = (value) => {
+  return {
+    type: ADD_SEARCH,
+    payload: value
+  }
+}
+
+export const setSearch = (value, query) => {
+  return {
+    type: SET_SEARCH,
+    payload: {
+      results: value.results,
+      pages: value.total_pages,
+      query: query
+    }
+  }
+}
+
 
 
 export const getNowPlaying = (value) => {
