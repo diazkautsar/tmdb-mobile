@@ -11,18 +11,14 @@ import { FontAwesome } from '@expo/vector-icons'
 import store from './src/store/store'
 import Home from './src/views/Home'
 import Detail from './src/views/Detail'
-import Profile from './src/views/Profile'
+import Favorite from './src/views/Favorite'
 import List from './src/views/List'
 
 import SearchBar from './src/components/SearchBarHeader'
 
 const HomeStack = createStackNavigator()
-const ProfileStack = createStackNavigator()
+const FavoriteStack = createStackNavigator()
 const Tab = createBottomTabNavigator()
-
-// const handleTouch = () => {
-//   console.log('OKEEE')
-// }
 
 const HomeStackScreen = () => {
   return (
@@ -50,21 +46,21 @@ const HomeStackScreen = () => {
   )
 }
 
-const ProfileStackScreen = () => {
+const FavoriteStackScreen = () => {
   return (
-    <ProfileStack.Navigator>
-      <ProfileStack.Screen 
-      name="Profile" 
-      component={Profile} 
+    <FavoriteStack.Navigator>
+      <FavoriteStack.Screen 
+      name="Favorite" 
+      component={Favorite} 
       options={{ header: () => <SearchBar /> }}
       />
-      <ProfileStack.Screen 
+      <FavoriteStack.Screen 
       name="Detail" 
       component={Detail} 
       options={{ header: () => <SearchBar /> }}
       />
-      <ProfileStack.Screen name="List" component={List} options={{ headerStyle: {backgroundColor: "#393534"} }} />
-    </ProfileStack.Navigator>
+      <FavoriteStack.Screen name="List" component={List} options={{ headerStyle: {backgroundColor: "#393534"} }} />
+    </FavoriteStack.Navigator>
   )
 }
 
@@ -78,7 +74,7 @@ export default function App() {
             {
               tabBarIcon: () => {
                 if (route.name === 'Home') return <FontAwesome name="home" size={24} color='#F4F4F4' />
-                else if (route.name === 'Profile') return <FontAwesome name="user" size={24} color='#F4F4F4' />
+                else if (route.name === 'Favorite') return <FontAwesome name="heart" size={24} color='#F4F4F4' />
               },
             }
           )}
@@ -99,7 +95,7 @@ export default function App() {
           //   },
           // }}
           />
-          <Tab.Screen name="Profile" component={ProfileStackScreen} 
+          <Tab.Screen name="Favorite" component={FavoriteStackScreen} 
           // options={{
           //   tabBarAccessibilityLabel: () => {
           //     console.log('masuuukkk pak ekooooo')

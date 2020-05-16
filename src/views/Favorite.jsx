@@ -4,7 +4,7 @@ import {
   Text,
 } from 'react-native';
 
-const Profile = () => {
+const Favorite = () => {
   return (
     <View>
       <Text>This Page for User Profile</Text>
@@ -12,4 +12,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default Favorite
