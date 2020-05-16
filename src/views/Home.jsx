@@ -45,13 +45,7 @@ const Home = () => {
       title: 'Popular',
       data: popular.results,
       icon: 'heart'
-    },
-    // {
-    //   icon: 'star'
-    // },
-    // {
-    //   icon: 'level-up'
-    // }
+    }
   ]
 
   return (
@@ -68,7 +62,6 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // marginTop: Constants.statusBarHeight,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 5,

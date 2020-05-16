@@ -10,8 +10,28 @@ import {
   SET_DETAIL,
   SET_VIDEO,
   SET_SEARCH,
-  ADD_SEARCH
+  ADD_SEARCH,
+  SET_FAVORITE,
+  CHECK_FAVORITE
 } from './actionType'
+
+
+export const setFavorite = (value) => {
+  console.log(value, 'ke trigger di creators')
+  let data = []
+  data.push(value)
+  return {
+    type: SET_FAVORITE,
+    payload: data
+  }
+}
+
+export const checkIsFavorite = (value) => {
+  return {
+    type: CHECK_FAVORITE,
+    payload: value
+  }
+}
 
 export const getSearch = (query, page) => {
   return async function (dispatch) {
@@ -46,8 +66,6 @@ export const setSearch = (value, query) => {
     }
   }
 }
-
-
 
 export const getNowPlaying = (value) => {
   return async function (dispatch) {
@@ -116,8 +134,10 @@ export const getDetail = (param) => {
       const video = await baseUrlMovie({
         url: `/${param}/videos?api_key=c8ae4195093d441d66861f9d8d7f3e63&language=en-US`
       })
+      console.log(data)
       dispatch(setVideo(video.data.results))
       dispatch(setDetail(data))
+      dispatch(checkIsFavorite(data))
     } catch (error) {
       console.log(error)
     }

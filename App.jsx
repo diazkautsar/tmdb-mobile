@@ -1,12 +1,10 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { TouchableOpacity } from 'react-native'
 import { Provider } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { FontAwesome } from '@expo/vector-icons'
-// import { FontAwesome5 } from '@expo/vector-icons';
 
 import store from './src/store/store'
 import Home from './src/views/Home'
@@ -26,7 +24,7 @@ const HomeStackScreen = () => {
       <HomeStack.Screen
         name="Home"
         component={Home}
-        options={{ 
+        options={{
           header: () => <SearchBar />
         }}
       />
@@ -35,12 +33,12 @@ const HomeStackScreen = () => {
         component={Detail}
         options={{ header: () => <SearchBar /> }}
       />
-      <HomeStack.Screen 
-        name="List" 
-        component={List} 
+      <HomeStack.Screen
+        name="List"
+        component={List}
         options={{
-          headerStyle: {backgroundColor: "#393534"} 
-        }} 
+          headerStyle: { backgroundColor: "#393534" }
+        }}
       />
     </HomeStack.Navigator>
   )
@@ -49,17 +47,17 @@ const HomeStackScreen = () => {
 const FavoriteStackScreen = () => {
   return (
     <FavoriteStack.Navigator>
-      <FavoriteStack.Screen 
-      name="Favorite" 
-      component={Favorite} 
-      options={{ header: () => <SearchBar /> }}
+      <FavoriteStack.Screen
+        name="Favorite"
+        component={Favorite}
+        options={{ headerStyle: { backgroundColor: "#393534" } }}
       />
-      <FavoriteStack.Screen 
-      name="Detail" 
-      component={Detail} 
-      options={{ header: () => <SearchBar /> }}
+      <FavoriteStack.Screen
+        name="Detail"
+        component={Detail}
+        options={{ header: () => <SearchBar /> }}
       />
-      <FavoriteStack.Screen name="List" component={List} options={{ headerStyle: {backgroundColor: "#393534"} }} />
+      <FavoriteStack.Screen name="List" component={List} options={{ headerStyle: { backgroundColor: "#393534" } }} />
     </FavoriteStack.Navigator>
   )
 }
@@ -86,21 +84,13 @@ export default function App() {
             inactiveTintColor: '#F4F4F4',
           }}
         >
-          <Tab.Screen 
-          name="Home" 
-          component={HomeStackScreen} 
-          // options={{
-          //   tabBarAccessibilityLabel: () => {
-          //     console.log('masuuukkk pak ekooooo')
-          //   },
-          // }}
+          <Tab.Screen
+            name="Home"
+            component={HomeStackScreen}
           />
-          <Tab.Screen name="Favorite" component={FavoriteStackScreen} 
-          // options={{
-          //   tabBarAccessibilityLabel: () => {
-          //     console.log('masuuukkk pak ekooooo')
-          //   },
-          // }}
+          <Tab.Screen
+            name="Favorite"
+            component={FavoriteStackScreen}
           />
         </Tab.Navigator>
       </NavigationContainer>

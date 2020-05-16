@@ -1,8 +1,9 @@
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Card, Button } from 'react-native-elements'
-import { getDetail } from '../store/actionCreators'
+import { getDetail, setFavorite } from '../store/actionCreators'
 import { Fontisto, FontAwesome, Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {
   View,
   Text,
@@ -23,10 +24,11 @@ const Detail = ({ route }) => {
   const loading = useSelector(state => state.movieReducer.loading)
   const detail = useSelector(state => state.movieReducer.detail)
   const video = useSelector(state => state.movieReducer.video)
+  const isFavorite = useSelector(state => state.movieReducer.isFavorite)
 
   useEffect(() => {
     dispatch(getDetail(id))
-  }, [])
+  }, [isFavorite])
 
   if (loading || detail.length == 0 || video.length == 0) return <Loading />
 
@@ -45,6 +47,11 @@ const Detail = ({ route }) => {
     )
   }
 
+  const addToFavorite = () => {
+    dispatch(setFavorite(detail))
+    Alert.alert('Success Add to Favorite')
+  }
+  
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -91,7 +98,6 @@ const Detail = ({ route }) => {
                   }}
                   keyExtractor={item => item.key}
                 />
-                {/* <Text>{`https://www.youtube.com/watch?v=${video.key}`}></Text> */}
               </View>
             </View>
           </View>
@@ -115,6 +121,17 @@ const Detail = ({ route }) => {
           <View style={{ marginTop: 10 }}>
             <Text>OVERVIEW:</Text>
             <Text style={{ textAlign: 'justify' }}>{detail.overview}</Text>
+          </View>
+          <View style={{ marginTop: 10 }}>
+            <Button 
+              title="Add To Favorite"
+              icon={
+                <MaterialCommunityIcons name="heart-multiple" size={24} color="white" />
+              }
+              buttonStyle={{ backgroundColor: '#393534' }}
+              onPress={() => addToFavorite()}
+              disabled={isFavorite === true ? true : false }
+            />
           </View>
         </Card>
       </ScrollView>

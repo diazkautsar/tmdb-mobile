@@ -1,5 +1,13 @@
 import {
-  SET_NOW_PLAYING, SET_LOADING, SET_UPCOMING, SET_POPULAR, SET_DETAIL, SET_VIDEO, SET_SEARCH, ADD_SEARCH
+  SET_NOW_PLAYING, 
+  SET_LOADING, 
+  SET_UPCOMING, 
+  SET_POPULAR, 
+  SET_DETAIL, SET_VIDEO, 
+  SET_SEARCH, 
+  ADD_SEARCH, 
+  SET_FAVORITE,
+  CHECK_FAVORITE
 } from '../actionType'
 
 const initialState = {
@@ -12,7 +20,9 @@ const initialState = {
   page: 1,
   search: null,
   total_pages: 0,
-  query: ''
+  query: '',
+  favorite: [],
+  isFavorite: false
 }
 
 export const movieReducer = (state = initialState, action) => {
@@ -23,6 +33,19 @@ export const movieReducer = (state = initialState, action) => {
         loading: action.payload
       }
 
+    case CHECK_FAVORITE:
+      let check = state.favorite.map(item => item.original_title).includes(action.payload.original_title)
+      return {
+        ...state,
+        isFavorite: check
+      }
+    
+    case SET_FAVORITE:
+      return {
+        ...state,
+        favorite: state.favorite.concat(action.payload)
+      }
+    
     case ADD_SEARCH:
       let newData = state.search.concat(action.payload)
       return {
