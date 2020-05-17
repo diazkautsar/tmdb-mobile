@@ -12,8 +12,16 @@ import {
   SET_SEARCH,
   ADD_SEARCH,
   SET_FAVORITE,
-  CHECK_FAVORITE
+  CHECK_FAVORITE,
+  SET_INITIAL_PAGE
 } from './actionType'
+
+export const setInitialPage = () => {
+  return {
+    type: SET_INITIAL_PAGE,
+    payload: 1
+  }
+}
 
 
 export const setFavorite = (value) => {

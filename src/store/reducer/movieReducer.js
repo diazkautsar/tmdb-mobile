@@ -7,7 +7,8 @@ import {
   SET_SEARCH, 
   ADD_SEARCH, 
   SET_FAVORITE,
-  CHECK_FAVORITE
+  CHECK_FAVORITE,
+  SET_INITIAL_PAGE
 } from '../actionType'
 
 const initialState = {
@@ -31,6 +32,12 @@ export const movieReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: action.payload
+      }
+
+    case SET_INITIAL_PAGE:
+      return {
+        ...state,
+        page: action.payload
       }
 
     case CHECK_FAVORITE:

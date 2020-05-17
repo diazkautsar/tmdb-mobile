@@ -62,6 +62,7 @@ const FavoriteStackScreen = () => {
   )
 }
 
+console.disableYellowBox = true
 
 export default function App() {
   return (

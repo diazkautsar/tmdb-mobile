@@ -1,9 +1,10 @@
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Card, Button } from 'react-native-elements'
-import { getDetail, setFavorite } from '../store/actionCreators'
+import { getDetail, setFavorite, setInitialPage } from '../store/actionCreators'
 import { Fontisto, FontAwesome, Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native'
 import {
   View,
   Text,
@@ -19,6 +20,7 @@ import {
 import Loading from '../components/Loading'
 
 const Detail = ({ route }) => {
+  const navigation = useNavigation()
   const dispatch = useDispatch()
   const { id } = route.params
   const loading = useSelector(state => state.movieReducer.loading)
@@ -27,8 +29,12 @@ const Detail = ({ route }) => {
   const isFavorite = useSelector(state => state.movieReducer.isFavorite)
 
   useEffect(() => {
-    dispatch(getDetail(id))
-  }, [isFavorite])
+    const unsubscribe = navigation.addListener('focus', () => {
+      dispatch(getDetail(id))
+      dispatch(setInitialPage())
+    })
+    return unsubscribe;
+  }, [isFavorite, navigation])
 
   if (loading || detail.length == 0 || video.length == 0) return <Loading />
 

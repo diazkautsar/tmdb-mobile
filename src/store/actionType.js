@@ -8,3 +8,4 @@ export const SET_SEARCH = 'SET_SEARCH'
 export const ADD_SEARCH = 'ADD_SEARCH'
 export const SET_FAVORITE = 'SET_FAVORITE'
 export const CHECK_FAVORITE = 'CHECK_FAVORITE'
+export const SET_INITIAL_PAGE = "SET_INITIAL_PAGE"

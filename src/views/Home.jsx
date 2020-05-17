@@ -1,21 +1,23 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigation } from '@react-navigation/native'
 import {
   StyleSheet,
   FlatList,
   View,
 } from 'react-native'
-// import Constants from 'expo-constants'
 import {
   getNowPlaying,
   getUpcoming,
-  getPopular
+  getPopular,
+  setInitialPage
 } from '../store/actionCreators'
 
 import Loading from '../components/Loading'
 import Card from '../components/Card'
 
 const Home = () => {
+  const navigation = useNavigation()
   const dispatch = useDispatch()
   const loading = useSelector(state => state.movieReducer.loading)
   const nowPlaying = useSelector(state => state.movieReducer.nowPlaying)
@@ -23,10 +25,14 @@ const Home = () => {
   const upcoming = useSelector(state => state.movieReducer.upcoming)
 
   useEffect(() => {
-    dispatch(getPopular('movie'))
-    dispatch(getUpcoming('movie'))
-    dispatch(getNowPlaying('movie'))
-  }, [])
+    const unsubscribe = navigation.addListener('focus', () => {
+      dispatch(getPopular('movie'))
+      dispatch(getUpcoming('movie'))
+      dispatch(getNowPlaying('movie'))
+      dispatch(setInitialPage())
+    })
+    return unsubscribe;
+  }, [navigation])
 
   if (loading || nowPlaying.length == 0 || popular.length == 0 || upcoming.length == 0) return <Loading />
 
